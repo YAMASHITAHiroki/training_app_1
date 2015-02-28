@@ -1,4 +1,5 @@
 source 'https://rubygems.org'
 
+gem 'bubble-wrap', '~> 1.7.1'
 gem 'rake'
 # Add your dependencies here:
