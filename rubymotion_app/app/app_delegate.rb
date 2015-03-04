@@ -1,13 +1,17 @@
 class AppDelegate
   def application(application, didFinishLaunchingWithOptions:launchOptions)
-    rootViewController = TATweetViewController.alloc.initWithNibName(nil, bundle: nil)
-    rootViewController.title = 'Top'
-    rootViewController.view.backgroundColor = UIColor.whiteColor
+    tweetViewController = TATweetViewController.alloc.initWithNibName(nil, bundle: nil)
+    tweetViewController.title = 'Top'
+    tweetViewController.view.backgroundColor = UIColor.whiteColor
 
-    navigationController = UINavigationController.alloc.initWithRootViewController(rootViewController)
-    
-    mainController = TAMainTabBarController.alloc.init
-    mainController.viewControllers = [navigationController]
+    tweetNavigationController = UINavigationController.alloc.initWithRootViewController(tweetViewController)
+
+    registViewController = TARegistViewController.alloc.initWithNibName(nil, bundle:nil)
+    registViewController.title = "Nextz"
+    registNavigationController = UINavigationController.alloc.initWithRootViewController(registViewController)
+
+    mainController = UITabBarController.alloc.init
+    mainController.viewControllers = [registNavigationController, tweetNavigationController]
 
     @window = UIWindow.alloc.initWithFrame(UIScreen.mainScreen.bounds)
     @window.rootViewController = mainController
