@@ -1,6 +1,7 @@
 json.user do
   json.id @user.id
   json.nickname @user.nickname
+  json.followed current_user.following?(@user)
 end
 json.microposts do
   json.array! @microposts do |micropost|

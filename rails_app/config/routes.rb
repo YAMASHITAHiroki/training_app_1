@@ -8,5 +8,6 @@ Rails.application.routes.draw do
     get "index" => "top#index"
     resources :users, only: [:index, :show]
     resources :microposts,    only: [:create, :destroy]
+    resources :relationships, only: [:create, :destroy]
   end
 end
