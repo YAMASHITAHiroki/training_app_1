@@ -1,4 +1,4 @@
-class Api::MicropostsController < ApplicationController
+class Api::MicropostsController < Api::BaseController
   before_action :set_micropost, only: [:destroy]
 
   def create
