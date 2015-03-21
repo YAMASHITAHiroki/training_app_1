@@ -1,0 +1,5 @@
+<% if current_user %>
+  <%= link_to "new micropost", new_micropost_path %>
+
+  <%= render @microposts %>
+<% end %>
