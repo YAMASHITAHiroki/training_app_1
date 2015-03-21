@@ -28,7 +28,6 @@ class TATweetViewController < UITableViewController
   def viewWillAppear(animated)
     super
     if @loadFlg then
-      @items.removeAllObjects()
       getTweet()
     end
   end
@@ -36,6 +35,7 @@ class TATweetViewController < UITableViewController
   #ptivateMethod
   def getTweet()
     BubbleWrap::HTTP.get("http://localhost:3000/api/index.json") do | response |
+      @items.removeAllObjects()
       json = BubbleWrap::JSON.parse(response.body.to_str)
       for data in json do
         tweet = Tweet.new
