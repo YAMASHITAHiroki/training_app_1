@@ -8,7 +8,7 @@ class Api::RelationshipsController < Api::BaseController
   end
 
   def destroy
-    @user = Relationship.find(params[:id]).followed
+    @user = User.find(params[:id])
     current_user.unfollow!(@user)
     respond_to do |format|
       format.js
