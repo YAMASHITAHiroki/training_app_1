@@ -16,7 +16,11 @@ sample_user_names = ["tomoya", "naoki", "mamiko", "sachiko", "bill"]
 sample_user_names.each do |user_name|
   user = User.create(email: "#{user_name}@example.com", nickname: "#{user_name}", password: "password")
 
-  5.times do |idx|
-    user.microposts.create(content: "#{user_name} #{idx} tweeee")
+end
+
+users = User.all
+5.times do |idx|
+  users.each do |user|
+    user.microposts.create(content: "#{user.nickname} #{idx} tweeee")
   end
 end
