@@ -1,5 +1,6 @@
 #Tweet一覧表示ViewController
 class TATweetViewController < UITableViewController
+  
   def initWithNibName(name, bundle: bundle)
     super
     #ツイートアイテムコレクション
@@ -19,19 +20,21 @@ class TATweetViewController < UITableViewController
     self.view.dataSource = self
 
     refreshControl = UIRefreshControl.alloc.init()
+    refreshControl.addTarget(self, action:"onRefresh:", forControlEvents:UIControlEventValueChanged)
+    self.refreshControl = refreshControl
 
   end
 
   def viewWillAppear(animated)
     super
     if @loadFlg then
+      @items.removeAllObjects()
       getTweet()
     end
   end
 
   #ptivateMethod
   def getTweet()
-    @items.removeAllObjects()
     BubbleWrap::HTTP.get("http://localhost:3000/api/index.json") do | response |
       json = BubbleWrap::JSON.parse(response.body.to_str)
       for data in json do
@@ -43,6 +46,7 @@ class TATweetViewController < UITableViewController
       end
       self.tableView.reloadData()
       @loadFlg = false
+      self.refreshControl.endRefreshing()
     end
   end
 
@@ -94,6 +98,12 @@ class TATweetViewController < UITableViewController
     postViewController = TATweetPostViewController.alloc.init()
     postNavCon = UINavigationController.alloc.initWithRootViewController(postViewController)
     self.presentViewController(postNavCon, animated:true, completion: nil)
+  end
+
+  #refreshMethod
+  def onRefresh(sender)
+    self.refreshControl.beginRefreshing()
+    getTweet()
   end
 
 end
