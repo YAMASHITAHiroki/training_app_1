@@ -11,3 +11,8 @@ taro = User.create(email: "taro@example.com", nickname: "taro", password: "passw
 10.times do |idx|
   taro.microposts.create(content: "#{idx} tweeee")
 end
+
+sample_user_names = ["tomoya", "naoki", "mamiko", "sachiko", "bill"]
+sample_user_names.each do |user_name|
+  User.create(email: "#{user_name}@example.com", nickname: "#{user_name}", password: "password")
+end

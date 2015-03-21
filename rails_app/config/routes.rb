@@ -6,6 +6,7 @@ Rails.application.routes.draw do
 
   namespace :api do
     get "index" => "top#index"
+    resources :users, only: [:index]
     resources :microposts,    only: [:create, :destroy]
   end
 end

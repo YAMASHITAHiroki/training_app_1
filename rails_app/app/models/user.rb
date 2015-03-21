@@ -5,5 +5,6 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
   validates :nickname, presence: true, length: { maximum: 20, allow_blank: true }, uniqueness: { case_sensitive: false }
   has_many :microposts, dependent: :destroy
+  default_scope -> { order('created_at DESC') }
 
 end
